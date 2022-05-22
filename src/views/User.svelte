@@ -2,17 +2,17 @@
     import PostList from "../components/PostList.svelte";
     import axios from "axios";
     import UserCard from "../components/UserCard.svelte";
-
+    import {apiHost} from "../config/config";
     export let params = {};
 
     async function getUser() {
-        const res = await axios.get(`https://localhost:7298/api/User/${params.id}`);
+        const res = await axios.get(`${apiHost}/User/${params.id}`);
 
         return res.data;
     }
 
     async function getPosts() {
-        const res = await axios.get(`https://localhost:7298/api/Posts/user/${params.id}`);
+        const res = await axios.get(`${apiHost}/Posts/user/${params.id}`);
 
         return res.data;
     }
