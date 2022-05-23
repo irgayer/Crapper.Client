@@ -3,7 +3,8 @@
     import { apiHost } from "../config/config";
     import { jwt } from '../config/stores';
     import {toast} from "@zerodevx/svelte-toast";
-    import {push} from "svelte-spa-router";
+    import { push } from "svelte-spa-router";
+    import { link } from 'svelte-spa-router';
 
     let email;
     let password;
@@ -42,3 +43,4 @@
     </div>
     <button type="submit" class="btn btn-primary" on:click|preventDefault={login}>Submit</button>
 </form>
+<p>Don't have account yet? <a href="/signup" use:link class="link-primary">Create new.</a></p>

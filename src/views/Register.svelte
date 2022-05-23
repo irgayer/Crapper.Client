@@ -2,7 +2,7 @@
     import axios from "axios";
     import {apiHost} from "../config/config";
     import {toast} from '@zerodevx/svelte-toast';
-    import {push} from "svelte-spa-router";
+    import {push, link} from "svelte-spa-router";
 
     let username;
     let password;
@@ -18,8 +18,7 @@
         console.log(user);
         axios.post(apiHost + '/User/register', user)
             .then(data => {
-                if (data.status == 200)
-                {
+                if (data.status == 200) {
                     toast.push('You have successfully registered');
                     push('/signin');
                     username = password = email = '';
@@ -48,3 +47,4 @@
     </div>
     <button type="submit" class="btn btn-primary" on:click|preventDefault={register}>Submit</button>
 </form>
+<p>Already have an account? <a href="/signin" class="link-primary" use:link>Sign in.</a></p>
