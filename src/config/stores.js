@@ -1,4 +1,9 @@
-import {writable} from "svelte/store";
+import {readable, writable} from "svelte/store";
 
-export const jwt = writable(undefined);
+const storedJwt = localStorage.getItem("jwt");
+export const jwtToken = writable(storedJwt === "null" ? null : storedJwt);
+
+jwtToken.subscribe(value => {
+    localStorage.setItem('jwt', value);
+})
 
