@@ -1,8 +1,12 @@
 <script>
+    import {jwtToken} from "../config/stores";
     import PostList from "../components/PostList.svelte";
     import axios from "axios";
     import UserCard from "../components/UserCard.svelte";
-    import {apiHost} from "../config/config";
+    import {apiAuth, apiHost} from "../config/config";
+    import {onMount} from "svelte";
+    import {push} from "svelte-spa-router";
+    import {toast} from "@zerodevx/svelte-toast";
     export let params = {};
 
     async function getUser() {
@@ -19,9 +23,19 @@
 
     let userPromise = getUser();
     let postsPromise = getPosts();
-    /*onMount(async() => {
-
-    })*/
+    onMount(() => {
+        if ($jwtToken)
+        {
+            axios.get(apiHost + '/User/whoami', apiAuth($jwtToken))
+                .then(data => {
+                    if (params.id == data.data.id)
+                        push('/');
+                })
+                .catch(e => {
+                    toast.push(e.message);
+                })
+        }
+    })
 </script>
 
 {#await userPromise}

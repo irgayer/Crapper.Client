@@ -1,7 +1,7 @@
 <script>
+    import { jwtToken } from '../config/stores';
     import axios from "axios";
     import { apiHost } from "../config/config";
-    import { jwt } from '../config/stores';
     import {toast} from "@zerodevx/svelte-toast";
     import { push } from "svelte-spa-router";
     import { link } from 'svelte-spa-router';
@@ -20,7 +20,7 @@
         axios.post(apiHost + '/User/login', user)
             .then(data => {
                 if (data.status === 200) {
-                    jwt.set(data.data);
+                    jwtToken.set(data.data);
                     toast.push("You have successfully logged in!");
                     push('/')
                     email = password = '';

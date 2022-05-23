@@ -8,7 +8,6 @@ let posts = [];
 onMount(async () => {
     axios.get(apiHost + '/Posts').then(data => {
         posts = data.data;
-        console.log(posts);
     }).catch(e => console.log(e.error))
 })
 

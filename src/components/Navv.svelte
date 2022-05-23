@@ -1,6 +1,7 @@
 <script>
+    import {jwtToken} from "../config/stores";
     import link from 'svelte-spa-router';
-    import {jwt} from "../config/stores";
+
     let username;
 
     function search() {
@@ -8,15 +9,15 @@
     }
 
     function logout() {
-        jwt.set(null);
+        jwtToken.set(null);
     }
 </script>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Crapper</a>
+        <a class="navbar-brand" href="/#/">Crapper</a>
         <ul class="navbar-nav">
-            {#if $jwt == null}
+            { #if !$jwtToken }
             <li class="nav-item">
                 <a class="nav-link" href="/#/signin">Sign In</a>
             </li>
