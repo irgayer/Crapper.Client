@@ -16,19 +16,3 @@ export const routes = {
     "/user/:id": User,
     "*" : NotFound,
 };
-
-/*
-export const routes = [
-    {
-        name: "/",
-        component: Home
-    },
-    {
-        name: "/recommended",
-        component: Recommended
-    },
-    {
-        name: "/following",
-        component: Following
-    }
-]*/
