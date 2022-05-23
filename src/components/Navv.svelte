@@ -1,9 +1,14 @@
 <script>
     import link from 'svelte-spa-router';
+    import {jwt} from "../config/stores";
     let username;
 
     function search() {
 
+    }
+
+    function logout() {
+        jwt.set(null);
     }
 </script>
 
@@ -11,19 +16,25 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Crapper</a>
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="/#/recommended">Recommended</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/#/following">Following</a>
-            </li>
-
+            {#if $jwt == null}
             <li class="nav-item">
                 <a class="nav-link" href="/#/signin">Sign In</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/#/signup">Sign up</a>
             </li>
+            {:else}
+                <li class="nav-item">
+                    <button class="nav-link" on:click={logout}>Logout</button>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#/following">Following</a>
+                </li>
+            {/if}
+            <li class="nav-item">
+                <a class="nav-link" href="/#/recommended">Recommended</a>
+            </li>
+
         </ul>
         <form class="d-flex">
             <input class="form-control me-2" bind:value={   username} type="search" placeholder="Username" aria-label="Search">
