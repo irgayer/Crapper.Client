@@ -1,6 +1,6 @@
 <script>
-    import {jwtToken} from "../config/stores";
-    import {link} from 'svelte-spa-router';
+    import {jwtToken, userId} from "../config/stores";
+    import {link, push} from 'svelte-spa-router';
     import axios from "axios";
     import {apiAuth, apiHost} from "../config/config";
     import {toast} from "@zerodevx/svelte-toast";
@@ -8,10 +8,12 @@
     import PostList from "../components/PostList.svelte";
 
     let content;
-
     let post = {
         content,
     };
+
+    let posts = [];
+
 
     function publish() {
         axios.post(apiHost + '/Posts', post, apiAuth($jwtToken))
@@ -26,12 +28,19 @@
             })
     }
 
-    let posts = [];
     onMount(() => {
         if ($jwtToken) {
             axios.get(apiHost + '/Posts/my', apiAuth($jwtToken))
                 .then(data => {
                     posts = data.data;
+
+                    axios.get(apiHost + '/User/whoami', apiAuth($jwtToken))
+                        .then(data => {
+                            userId.set(data.data.id);
+                        })
+                        .catch(e => {
+                            toast.push(e.message);
+                        })
                 })
                 .catch(e => console.log(e.error))
         }

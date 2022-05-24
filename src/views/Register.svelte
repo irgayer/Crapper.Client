@@ -15,7 +15,6 @@
     };
 
     function register() {
-        console.log(user);
         axios.post(apiHost + '/User/register', user)
             .then(data => {
                 if (data.status == 200) {

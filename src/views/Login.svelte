@@ -15,8 +15,6 @@
     };
 
     function login() {
-        console.log(user);
-
         axios.post(apiHost + '/User/login', user)
             .then(data => {
                 if (data.status === 200) {
@@ -29,6 +27,7 @@
             .catch(e => {
                 toast.push(e.message);
             });
+
     }
 </script>
 

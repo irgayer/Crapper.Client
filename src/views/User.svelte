@@ -1,5 +1,5 @@
 <script>
-    import {jwtToken} from "../config/stores";
+    import {jwtToken, userId} from "../config/stores";
     import PostList from "../components/PostList.svelte";
     import axios from "axios";
     import UserCard from "../components/UserCard.svelte";
@@ -29,7 +29,9 @@
             axios.get(apiHost + '/User/whoami', apiAuth($jwtToken))
                 .then(data => {
                     if (params.id == data.data.id)
+                    {
                         push('/');
+                    }
                 })
                 .catch(e => {
                     toast.push(e.message);
