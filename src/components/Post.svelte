@@ -4,10 +4,12 @@
     import {toast} from "@zerodevx/svelte-toast";
     import axios from "axios";
 
-    export let content;
+    /*export let content;
     export let authorUsername;
     export let authorId;
-    export let id;
+    export let id;*/
+
+    export let post;
 
     function deletePost(id) {
         axios.delete(apiHost + `/Posts/${id}`, apiAuth($jwtToken))
@@ -21,11 +23,11 @@
 </script>
 
 <div class="card">
-    <h5 class="card-header"><a href="/#/user/{authorId}">{authorUsername}</a></h5>
+    <h5 class="card-header"><a href="/#/user/{post.authorId}">{post.authorUsername}</a></h5>
     <div class="card-body">
-        <p class="card-text">{content}</p>
-        {#if $userId === authorId}
-            <button class="btn btn-danger" on:click={() => deletePost(id)}>Delete</button>
+        <p class="card-text">{post.content}</p>
+        {#if $userId === post.authorId}
+            <button class="btn btn-danger" on:click={() => deletePost(post.id)}>Delete</button>
         {/if}
     </div>
     <div class="card-footer">
