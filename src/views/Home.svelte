@@ -33,14 +33,6 @@
             axios.get(apiHost + '/Posts/my', apiAuth($jwtToken))
                 .then(data => {
                     posts = data.data;
-
-                    axios.get(apiHost + '/User/whoami', apiAuth($jwtToken))
-                        .then(data => {
-                            userId.set(data.data.id);
-                        })
-                        .catch(e => {
-                            toast.push(e.message);
-                        })
                 })
                 .catch(e => console.log(e.error))
         }
