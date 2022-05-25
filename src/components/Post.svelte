@@ -2,6 +2,7 @@
     import {apiAuth, apiHost} from "../config/config";
     import {jwtToken, userId} from "../config/stores";
     import {toast} from "@zerodevx/svelte-toast";
+    import {createEventDispatcher} from 'svelte';
     import axios from "axios";
 
     /*export let content;
@@ -10,15 +11,19 @@
     export let id;*/
 
     export let post;
+    const dispatch = createEventDispatcher();
 
     function deletePost(id) {
-        axios.delete(apiHost + `/Posts/${id}`, apiAuth($jwtToken))
+        dispatch('message', {
+            id: id
+        });
+       /* axios.delete(apiHost + `/Posts/${id}`, apiAuth($jwtToken))
             .then(data => {
                 if (data.status === 200) {
                     toast.push("Successfully deleted!");
                 }
             })
-            .catch(e => toast.push(e.message));
+            .catch(e => toast.push(e.message));*/
     }
 </script>
 

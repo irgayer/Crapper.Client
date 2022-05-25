@@ -5,5 +5,5 @@
 </script>
 
 {#each posts as post}
-    <Post {post}/>
+    <Post on:message {post}/>
 {/each}

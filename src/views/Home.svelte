@@ -21,6 +21,7 @@
                 if (data.status === 200) {
                     toast.push("Success!");
                     post.content = '';
+                    getPosts()
                 }
             })
             .catch(e => {
@@ -28,14 +29,28 @@
             })
     }
 
+    function getPosts() {
+        axios.get(apiHost + '/Posts/my', apiAuth($jwtToken))
+            .then(data => {
+                posts = data.data;
+            })
+            .catch(e => console.log(e.error))
+    }
+
+    function deletePost(event) {
+        const id = event.detail.id;
+        axios.delete(apiHost + `/Posts/${id}`, apiAuth($jwtToken))
+            .then(data => {
+                if (data.status === 200) {
+                    toast.push("Successfully deleted!");
+                    getPosts();
+                }
+            })
+            .catch(e => toast.push(e.message));
+    }
+
     onMount(() => {
-        if ($jwtToken) {
-            axios.get(apiHost + '/Posts/my', apiAuth($jwtToken))
-                .then(data => {
-                    posts = data.data;
-                })
-                .catch(e => console.log(e.error))
-        }
+        getPosts()
     })
 </script>
 
@@ -49,7 +64,7 @@
         </div>
         <button class="btn btn-success" on:click|preventDefault={publish}>Publish</button>
     </form>
-    <PostList posts="{posts}"/>
+    <PostList on:message={deletePost} posts="{posts}"/>
 {:else}
     <p>You are not <a href="/signin" use:link>logged in!</a></p>
 {/if}
