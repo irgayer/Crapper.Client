@@ -16,7 +16,7 @@
 
 
     function publish() {
-        axios.post(apiHost + '/Posts', post, apiAuth($jwtToken))
+        axios.post(apiHost + '/posts', post, apiAuth($jwtToken))
             .then(data => {
                 if (data.status === 200) {
                     toast.push("Success!");
@@ -30,7 +30,7 @@
     }
 
     function getPosts() {
-        axios.get(apiHost + '/Posts/my', apiAuth($jwtToken))
+        axios.get(apiHost + '/posts/my', apiAuth($jwtToken))
             .then(data => {
                 posts = data.data;
             })
@@ -39,7 +39,7 @@
 
     function deletePost(event) {
         const id = event.detail.id;
-        axios.delete(apiHost + `/Posts/${id}`, apiAuth($jwtToken))
+        axios.delete(apiHost + `/posts/${id}`, apiAuth($jwtToken))
             .then(data => {
                 if (data.status === 200) {
                     toast.push("Successfully deleted!");

@@ -6,7 +6,7 @@ import {apiHost} from "../config/config";
 
 let posts = [];
 onMount(async () => {
-    axios.get(apiHost + '/Posts').then(data => {
+    axios.get(apiHost + '/posts').then(data => {
         posts = data.data;
     }).catch(e => console.log(e.error))
 })

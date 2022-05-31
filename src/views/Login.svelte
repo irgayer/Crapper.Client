@@ -15,7 +15,7 @@
     };
 
     function login() {
-        axios.post(apiHost + '/User/login', user)
+        axios.post(apiHost + '/user/login', user)
             .then(data => {
                 if (data.status === 200) {
                     jwtToken.set(data.data);

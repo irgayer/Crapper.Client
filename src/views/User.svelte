@@ -10,13 +10,13 @@
     export let params = {};
 
     async function getUser() {
-        const res = await axios.get(`${apiHost}/User/${params.id}`);
+        const res = await axios.get(`${apiHost}/user/${params.id}`);
 
         return res.data;
     }
 
     async function getPosts() {
-        const res = await axios.get(`${apiHost}/Posts/user/${params.id}`);
+        const res = await axios.get(`${apiHost}/posts/user/${params.id}`);
 
         return res.data;
     }
@@ -26,7 +26,7 @@
     onMount(() => {
         if ($jwtToken)
         {
-            axios.get(apiHost + '/User/whoami', apiAuth($jwtToken))
+            axios.get(apiHost + '/user/whoami', apiAuth($jwtToken))
                 .then(data => {
                     if (params.id == data.data.id)
                     {

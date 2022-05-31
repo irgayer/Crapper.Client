@@ -15,7 +15,7 @@
     };
 
     function register() {
-        axios.post(apiHost + '/User/register', user)
+        axios.post(apiHost + '/user/register', user)
             .then(data => {
                 if (data.status == 200) {
                     toast.push('You have successfully registered');
